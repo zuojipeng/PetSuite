@@ -1,0 +1,19 @@
+{
+  "name": "@petsuite/shared",
+  "version": "0.1.0",
+  "description": "Shared types, constants, and utilities for PetSuite",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": ["petsuite", "shared", "types"],
+  "author": "PetSuite Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.10.0"
+  }
+}

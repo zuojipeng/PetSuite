@@ -1,0 +1,47 @@
+{
+  "name": "petsuite-monorepo",
+  "version": "1.0.0",
+  "description": "AI-Powered Pet Care Platform on Monad Blockchain - Monorepo",
+  "private": true,
+  "scripts": {
+    "dev:backend": "pnpm --filter @petsuite/backend dev",
+    "dev:frontend": "pnpm --filter @petsuite/frontend dev",
+    "dev:shared": "pnpm --filter @petsuite/shared dev",
+    "build:backend": "pnpm --filter @petsuite/backend build",
+    "build:frontend": "pnpm --filter @petsuite/frontend build",
+    "build:shared": "pnpm --filter @petsuite/shared build",
+    "build:all": "pnpm -r --filter './packages/**' build",
+    "compile:contracts": "pnpm --filter @petsuite/contracts compile",
+    "deploy:contracts": "pnpm --filter @petsuite/contracts deploy",
+    "test:contracts": "pnpm --filter @petsuite/contracts test",
+    "test:backend": "pnpm --filter @petsuite/backend test",
+    "test:all": "pnpm -r test",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "lint": "pnpm -r lint",
+    "format": "prettier --write \"packages/**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "keywords": [
+    "monorepo",
+    "ai",
+    "agent",
+    "pet-care",
+    "blockchain",
+    "monad",
+    "nft",
+    "web3"
+  ],
+  "author": "PetSuite Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourteam/petsuite"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "turbo": "^1.11.0"
+  }
+}

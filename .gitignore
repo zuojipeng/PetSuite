@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+*/dist/
+*/build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Contract artifacts
+artifacts/
+cache/
+typechain/
+typechain-types/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# MongoDB
+data/
+
+# Temporary files
+*.tmp
+.temp/
+
+# Hackathon-specific documentation (local only)
+docs/PetSuite_Hackathon_PRD_v2.md
+docs/Track_Strategy.md
+docs/TODO.md
+IMPLEMENTATION_SUMMARY.md
+MONOREPO_MIGRATION.md

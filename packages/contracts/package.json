@@ -1,0 +1,28 @@
+{
+  "name": "@petsuite/contracts",
+  "version": "1.0.0",
+  "description": "PetSuite Smart Contracts",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts --network monad",
+    "verify": "hardhat verify --network monad",
+    "clean": "hardhat clean"
+  },
+  "keywords": ["smart-contracts", "monad", "nft", "ai"],
+  "author": "PetSuite Team",
+  "license": "MIT",
+  "dependencies": {
+    "@petsuite/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "hardhat": "^2.19.0",
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@typechain/hardhat": "^9.1.0",
+    "typechain": "^8.3.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.2"
+  }
+}
