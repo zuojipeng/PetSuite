@@ -1,0 +1,201 @@
+{
+  "nav": {
+    "home": "Home",
+    "myPets": "My Pets",
+    "smartRecommend": "Smart Recommend",
+    "marketplace": "Marketplace",
+    "profile": "Profile",
+    "connectWallet": "Connect Wallet",
+    "merchantCenter": "Merchant Center",
+    "backToUser": "Back to User",
+    "myOrders": "My Orders",
+    "advancedFeatures": "Advanced",
+    "myNFTs": "My Digital Assets",
+    "settings": "Settings"
+  },
+  "home": {
+    "title": "Welcome to PetSuite 🐾",
+    "subtitle": "AI-powered pet care decision engine providing expert-level recommendations and personalized care plans.",
+    "features": {
+      "aiExpert": {
+        "title": "AI Expert Recommendations",
+        "description": "Multiple specialized AI agents collaborate to provide comprehensive advice on nutrition, health, and behavior"
+      },
+      "personalizedCare": {
+        "title": "Personalized Care Plans",
+        "description": "Generate custom diet, exercise, and care plans based on your pet's profile and real-time data"
+      },
+      "digitalRecord": {
+        "title": "Permanent Digital Records",
+        "description": "Optional upgrade: Save pet profiles and health records long term with exclusive member benefits"
+      }
+    },
+    "cta": {
+      "addMyPet": "Add My Pet",
+      "getRecommendations": "Get Smart Recommendations"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1": {
+        "title": "Add Pet Profile",
+        "description": "Enter basic info, AI helps complete your pet's profile"
+      },
+      "step2": {
+        "title": "Get Smart Recommendations",
+        "description": "Multiple AI experts analyze your needs and recommend the best products and plans"
+      },
+      "step3": {
+        "title": "One-Click Purchase",
+        "description": "Buy directly, optionally upgrade to digital membership for exclusive benefits"
+      }
+    }
+  },
+  "createProfile": {
+    "title": "Create Pet Profile",
+    "form": {
+      "petName": "Pet Name",
+      "species": "Species",
+      "selectSpecies": "Select species",
+      "cat": "Cat",
+      "dog": "Dog",
+      "breed": "Breed (optional)",
+      "age": "Age (years)",
+      "healthDescription": "Health Notes",
+      "dietPreferences": "Diet Preferences",
+      "personality": "Personality",
+      "habits": "Habits & Other Notes",
+      "description": "Description",
+      "placeholders": {
+        "name": "e.g., Pudding",
+        "breed": "e.g., British Shorthair, Corgi",
+        "age": "e.g., 3",
+        "healthDescription": "Known conditions, allergies, weight, etc.",
+        "dietPreferences": "Food preferences, restrictions, dislikes...",
+        "personality": "Energetic, calm, clingy, etc.",
+        "habits": "Daily routines, activity level, social behavior...",
+        "description": "Describe your pet: breed, personality, health conditions, dietary needs, etc."
+      },
+      "next": "Next",
+      "back": "Back",
+      "submit": "Create Profile with AI",
+      "submitting": "Analyzing..."
+    },
+    "steps": {
+      "basic": "Basic Info",
+      "health": "Health",
+      "personality": "Personality"
+    },
+    "aiFill": {
+      "title": "AI Smart Fill",
+      "description": "Estimate breed and age, then suggest personality and habit notes",
+      "button": "Use AI Smart Fill",
+      "loading": "Analyzing...",
+      "suggestion": "AI estimate: {breed}, about {age} years",
+      "defaultBreedCat": "Likely mixed breed (cat)",
+      "defaultBreedDog": "Likely mixed breed (dog)",
+      "defaultPersonality": "Friendly and active, benefits from regular interaction and calm downtime.",
+      "defaultHabits": "Recommend daily exercise, steady routines, and proper hydration.",
+      "unknownBreed": "Breed unknown",
+      "unknownAge": "Unknown"
+    },
+    "summary": {
+      "name": "Name",
+      "species": "Species",
+      "breed": "Breed",
+      "age": "Age",
+      "healthDescription": "Health",
+      "dietPreferences": "Diet",
+      "personality": "Personality",
+      "habits": "Habits",
+      "notProvided": "Not provided"
+    },
+    "result": {
+      "title": "Profile Created!",
+      "petInfo": "Pet Information",
+      "name": "Name",
+      "species": "Species",
+      "breed": "Breed",
+      "age": "Age",
+      "years": "years",
+      "healthScore": "Health Score",
+      "aiRecommendations": "AI Recommendations",
+      "diet": "Diet",
+      "exercise": "Exercise",
+      "checkups": "Checkups",
+      "analysisConfidence": "Analysis Confidence",
+      "confidence": "confidence",
+      "executionTime": "Execution time"
+    },
+    "error": "Failed to create profile"
+  },
+  "aiAdvisor": {
+    "title": "AI Advisor",
+    "warning": "Please create a pet profile first to get personalized recommendations.",
+    "createProfileLink": "Create Profile",
+    "currentProfile": "Current Pet Profile",
+    "healthScore": "Health Score",
+    "quickQuestionTitle": "Quick Questions",
+    "quickQuestions": {
+      "food": "Food for sensitive stomachs",
+      "health": "Joint care and supplements",
+      "behavior": "Reduce picky eating or anxiety",
+      "newPet": "New pet starter checklist"
+    },
+    "form": {
+      "label": "Ask AI Advisor",
+      "placeholder": "e.g., 'Recommend cat food for sensitive stomach' or 'Best toys for senior dogs'",
+      "submit": "Get Recommendations",
+      "submitting": "Analyzing..."
+    },
+    "result": {
+      "summaryTitle": "AI Summary",
+      "summarySubtitle": "Top pick with key reasons at a glance",
+      "summaryStats": "This analysis",
+      "totalRecommendations": "Recommendations",
+      "totalAvoid": "Avoid",
+      "keyPros": "Best Fits",
+      "keyCons": "Watchouts",
+      "recommendations": "Recommendations",
+      "matchScore": "Match Score",
+      "pros": "Pros",
+      "cons": "Cons",
+      "productsToAvoid": "Products to Avoid",
+      "generalAdvice": "General Advice",
+      "reasoningTitle": "Reasoning Process",
+      "nodeConfidence": "Node confidence",
+      "analysisDetails": "Analysis Details",
+      "confidence": "Confidence",
+      "executionTime": "Execution Time",
+      "blockchainProof": "Blockchain Proof"
+    },
+    "error": "Please create a pet profile first"
+  },
+  "myNFTs": {
+    "title": "My Pet NFTs",
+    "connectWallet": "Please connect your wallet to view your Pet NFTs.",
+    "loading": "Loading your NFTs...",
+    "empty": "You don't have any Pet NFTs yet.",
+    "createFirst": "Create Your First Pet Profile",
+    "card": {
+      "species": "Species",
+      "breed": "Breed",
+      "unknown": "Unknown",
+      "healthScore": "Health Score",
+      "viewDetails": "View Details"
+    },
+    "details": {
+      "title": "Pet NFT Details",
+      "tokenId": "Token ID",
+      "owner": "Owner",
+      "lifeStage": "Life Stage",
+      "aiConsultCount": "AI Consult Count",
+      "memberDiscount": "Member Discount",
+      "metadataURI": "Metadata URI",
+      "viewOnExplorer": "View on Monad Explorer"
+    }
+  },
+  "common": {
+    "close": "Close",
+    "error": "An error occurred"
+  }
+}

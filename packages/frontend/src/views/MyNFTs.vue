@@ -1,15 +1,15 @@
 <template>
   <div class="max-w-6xl mx-auto">
-    <h1 class="text-3xl font-bold mb-8">My Pet NFTs</h1>
+    <h1 class="text-3xl font-bold mb-8">{{ t('myNFTs.title') }}</h1>
 
     <div v-if="!connected" class="bg-yellow-50 p-6 rounded-lg">
       <p class="text-yellow-800">
-        Please connect your wallet to view your Pet NFTs.
+        {{ t('myNFTs.connectWallet') }}
       </p>
     </div>
 
     <div v-else-if="loading" class="text-center py-12">
-      <p class="text-gray-600">Loading your NFTs...</p>
+      <p class="text-gray-600">{{ t('myNFTs.loading') }}</p>
     </div>
 
     <div v-else-if="error" class="bg-red-50 p-6 rounded-lg">
@@ -17,12 +17,12 @@
     </div>
 
     <div v-else-if="nfts.length === 0" class="bg-gray-50 p-12 rounded-lg text-center">
-      <p class="text-gray-600 mb-4">You don't have any Pet NFTs yet.</p>
+      <p class="text-gray-600 mb-4">{{ t('myNFTs.empty') }}</p>
       <router-link
         to="/create-profile"
         class="inline-block bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition"
       >
-        Create Your First Pet Profile
+        {{ t('myNFTs.createFirst') }}
       </router-link>
     </div>
 
@@ -45,10 +45,10 @@
           </div>
 
           <div class="space-y-2 text-sm text-gray-700">
-            <p><strong>Species:</strong> {{ nft.species }}</p>
-            <p><strong>Breed:</strong> {{ nft.breed || 'Unknown' }}</p>
+            <p><strong>{{ t('myNFTs.card.species') }}:</strong> {{ nft.species }}</p>
+            <p><strong>{{ t('myNFTs.card.breed') }}:</strong> {{ nft.breed || t('myNFTs.card.unknown') }}</p>
             <p>
-              <strong>Health Score:</strong>
+              <strong>{{ t('myNFTs.card.healthScore') }}:</strong>
               <span
                 :class="{
                   'text-green-600': nft.healthScore > 80,
@@ -65,7 +65,7 @@
             @click="viewDetails(nft.tokenId)"
             class="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition"
           >
-            View Details
+            {{ t('myNFTs.card.viewDetails') }}
           </button>
         </div>
       </div>
@@ -79,7 +79,7 @@
     >
       <div class="bg-white rounded-lg max-w-2xl w-full p-8 max-h-[90vh] overflow-y-auto">
         <div class="flex justify-between items-start mb-6">
-          <h2 class="text-2xl font-bold">Pet NFT Details</h2>
+          <h2 class="text-2xl font-bold">{{ t('myNFTs.details.title') }}</h2>
           <button
             @click="selectedNFT = null"
             class="text-gray-500 hover:text-gray-700"
@@ -90,32 +90,32 @@
 
         <div class="space-y-4">
           <div>
-            <p class="text-sm text-gray-600">Token ID</p>
+            <p class="text-sm text-gray-600">{{ t('myNFTs.details.tokenId') }}</p>
             <p class="font-semibold">{{ selectedNFT.tokenId }}</p>
           </div>
 
           <div>
-            <p class="text-sm text-gray-600">Owner</p>
+            <p class="text-sm text-gray-600">{{ t('myNFTs.details.owner') }}</p>
             <p class="font-mono text-sm break-all">{{ selectedNFT.owner }}</p>
           </div>
 
           <div v-if="selectedNFT.petEvolution">
-            <p class="text-sm text-gray-600">Life Stage</p>
+            <p class="text-sm text-gray-600">{{ t('myNFTs.details.lifeStage') }}</p>
             <p class="font-semibold">{{ selectedNFT.petEvolution.stage }}</p>
           </div>
 
           <div v-if="selectedNFT.petEvolution">
-            <p class="text-sm text-gray-600">AI Consult Count</p>
+            <p class="text-sm text-gray-600">{{ t('myNFTs.details.aiConsultCount') }}</p>
             <p class="font-semibold">{{ selectedNFT.petEvolution.aiConsultCount }}</p>
           </div>
 
           <div>
-            <p class="text-sm text-gray-600">Member Discount</p>
+            <p class="text-sm text-gray-600">{{ t('myNFTs.details.memberDiscount') }}</p>
             <p class="font-semibold text-green-600">{{ selectedNFT.discount }}%</p>
           </div>
 
           <div v-if="selectedNFT.metadataURI">
-            <p class="text-sm text-gray-600">Metadata URI</p>
+            <p class="text-sm text-gray-600">{{ t('myNFTs.details.metadataURI') }}</p>
             <p class="text-xs font-mono break-all text-gray-700">
               {{ selectedNFT.metadataURI }}
             </p>
@@ -126,7 +126,7 @@
             target="_blank"
             class="block w-full text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
           >
-            View on Monad Explorer
+            {{ t('myNFTs.details.viewOnExplorer') }}
           </a>
         </div>
       </div>
@@ -135,10 +135,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useAPI } from '../composables/useAPI'
 import { useWeb3 } from '../composables/useWeb3'
 
+const { t } = useI18n()
 const api = useAPI()
 const { connected, address } = useWeb3()
 
@@ -165,10 +167,10 @@ const loadNFTs = async () => {
     if (response.success) {
       nfts.value = response.nfts
     } else {
-      error.value = response.error || 'Failed to load NFTs'
+      error.value = response.error || t('common.error')
     }
   } catch (err: any) {
-    error.value = err.response?.data?.error || err.message || 'An error occurred'
+    error.value = err.response?.data?.error || err.message || t('common.error')
   } finally {
     loading.value = false
   }
@@ -182,7 +184,7 @@ const viewDetails = async (tokenId: number) => {
       selectedNFT.value = response
     }
   } catch (err: any) {
-    error.value = err.response?.data?.error || err.message || 'Failed to load NFT details'
+    error.value = err.response?.data?.error || err.message || t('common.error')
   }
 }
 </script>

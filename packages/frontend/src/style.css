@@ -1,31 +1,119 @@
+/* Google Fonts - @import must come first */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@layer base {
+  :root {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  body {
+    @apply font-sans min-h-screen selection:bg-primary/30;
+    margin: 0;
+    min-width: 320px;
+    /* 温暖的渐变背景 */
+    background: linear-gradient(135deg, #fff5e6 0%, #fffaf5 50%, #ffebe6 100%);
+    color: #5a4a42;
+  }
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* 深色主题根元素 */
+  body.dark {
+    @apply bg-background-dark text-slate-100;
+  }
+
+  #app {
+    width: 100%;
+    min-height: 100vh;
+  }
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+@layer components {
+  /* 玻璃态卡片 */
+  .glass-card {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-white/10;
+  }
+
+  /* 自定义滚动条 */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+  }
+
+  /* 温暖渐变背景 */
+  .gradient-mesh {
+    background: radial-gradient(circle at 10% 20%, rgba(255, 157, 92, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 209, 102, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 203, 176, 0.08) 0%, transparent 50%);
+  }
+
+  /* 温暖卡片样式 */
+  .warm-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-[2rem] border-2 border-warm-gray shadow-lg;
+  }
+
+  .warm-card-hover {
+    @apply hover:bg-white hover:shadow-2xl transition-all duration-300;
+  }
+
+  /* 思考步骤样式（用于 AI 推理展示） */
+  .thought-step {
+    @apply relative pl-6 border-l-2 border-white/10 pb-4 last:pb-0;
+  }
+
+  .thought-step::before {
+    content: '';
+    @apply absolute left-[-5px] top-1.5 w-2 h-2 rounded-full bg-primary;
+  }
 }
 
-#app {
-  width: 100%;
-  min-height: 100vh;
+@layer utilities {
+  /* 动画工具类 */
+  .animate-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .slide-in-from-bottom-4 {
+    animation: slideInFromBottom 0.5s ease-in-out;
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }

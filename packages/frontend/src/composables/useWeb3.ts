@@ -31,7 +31,12 @@ export function useWeb3() {
 
       store.setWallet(address.value)
 
-      await switchToMonad()
+      try {
+        await switchToMonad()
+      } catch (error) {
+        console.warn('Network switch failed, staying connected:', error)
+        alert('已连接钱包，但切换网络失败，请手动切换到 Monad 测试网')
+      }
 
       console.log('Connected to wallet:', address.value)
     } catch (error: any) {
@@ -44,7 +49,7 @@ export function useWeb3() {
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x138822' }], // 80002 in hex
+        params: [{ chainId: '0x138822' }],
       })
     } catch (error: any) {
       // Chain not added, try to add it
