@@ -2,8 +2,14 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './database/mongodb';
+import { initializeModels } from './models';
 import agentRoutes, { initializeOrchestrator } from './routes/agents';
 import nftRoutes from './routes/nfts';
+import petRoutes from './routes/pets';
+import productRoutes from './routes/products';
+import orderRoutes from './routes/orders';
+import merchantRoutes from './routes/merchant';
+import aiRoutes from './routes/ai';
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +40,11 @@ app.get('/health', (req: Request, res: Response) => {
 // Routes
 app.use('/api/agents', agentRoutes);
 app.use('/api/nfts', nftRoutes);
+app.use('/api/pets', petRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/merchant', merchantRoutes);
+app.use('/api/ai', aiRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {
@@ -59,13 +70,17 @@ async function startServer() {
     // Connect to MongoDB
     await connectDB();
 
-    // Initialize agent orchestrator
+    // Initialize database models and indexes
+    await initializeModels();
+
+    // Initialize agent orchestrator (optional)
     const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      throw new Error('OPENAI_API_KEY not configured');
+    if (apiKey) {
+      initializeOrchestrator(apiKey);
+      console.log('✅ Agent orchestrator initialized');
+    } else {
+      console.log('⚠️  OPENAI_API_KEY not configured, agent routes may not work');
     }
-    initializeOrchestrator(apiKey);
-    console.log('✅ Agent orchestrator initialized');
 
     // Start listening
     app.listen(PORT, () => {

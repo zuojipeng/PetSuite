@@ -37,7 +37,7 @@ importers:
         version: 4.22.1
       langchain:
         specifier: ^0.1.0
-        version: 0.1.37(axios@1.13.3)(handlebars@4.7.8)(ignore@5.3.2)(lodash@4.17.23)(mongodb@6.21.0)(openai@4.104.0(ws@8.18.3)(zod@3.25.76))(redis@4.7.1)(ws@8.18.3)
+        version: 0.1.37(axios@1.13.3)(handlebars@4.7.8)(ignore@5.3.2)(lodash@4.17.23)(mongodb@6.21.0)(openai@4.104.0(ws@8.18.3)(zod@3.25.76))(playwright@1.58.1)(redis@4.7.1)(ws@8.18.3)
       mongodb:
         specifier: ^6.3.0
         version: 6.21.0
@@ -143,6 +143,9 @@ importers:
         specifier: ^4.2.5
         version: 4.6.4(vue@3.5.27(typescript@5.9.3))
     devDependencies:
+      '@playwright/test':
+        specifier: ^1.58.1
+        version: 1.58.1
       '@vitejs/plugin-vue':
         specifier: ^5.0.0
         version: 5.2.4(vite@5.4.21(@types/node@22.7.5))(vue@3.5.27(typescript@5.9.3))
@@ -1282,6 +1285,11 @@ packages:
 
   '@openzeppelin/contracts@5.4.0':
     resolution: {integrity: sha512-eCYgWnLg6WO+X52I16TZt8uEjbtdkgLC0SUX/xnAksjjrQI4Xfn4iBRoI5j55dmlOhDv1Y7BoR3cU7e3WWhC6A==}
+
+  '@playwright/test@1.58.1':
+    resolution: {integrity: sha512-6LdVIUERWxQMmUSSQi0I53GgCBYgM2RpGngCPY7hSeju+VrKjq3lvs7HpJoPbDiY5QM5EYRtRX5fvrinnMAz3w==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@redis/bloom@1.2.0':
     resolution: {integrity: sha512-HG2DFjYKbpNmVXsa0keLHp/3leGJz1mjh09f2RLGGLQZzSHpkmZWuwJbAvo3QcRY8p80m5+ZdXZdYOSBLlp7Cg==}
@@ -3031,6 +3039,11 @@ packages:
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -4326,6 +4339,16 @@ packages:
   pkg-dir@4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
+
+  playwright-core@1.58.1:
+    resolution: {integrity: sha512-bcWzOaTxcW+VOOGBCQgnaKToLJ65d6AqfLVKEWvexyS3AS6rbXl+xdpYRMGSRBClPvyj44njOWoxjNdL/H9UNg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.58.1:
+    resolution: {integrity: sha512-+2uTZHxSCcxjvGc5C891LrS1/NlxglGxzrC4seZiVjcYVQfUa87wBL6rTDqzGjuoWNjnBzRqKmF6zRYGMvQUaQ==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   pngjs@5.0.0:
     resolution: {integrity: sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==}
@@ -6746,6 +6769,10 @@ snapshots:
 
   '@openzeppelin/contracts@5.4.0': {}
 
+  '@playwright/test@1.58.1':
+    dependencies:
+      playwright: 1.58.1
+
   '@redis/bloom@1.2.0(@redis/client@1.6.1)':
     dependencies:
       '@redis/client': 1.6.1
@@ -9143,6 +9170,9 @@ snapshots:
 
   fs.realpath@1.0.0: {}
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -9931,7 +9961,7 @@ snapshots:
 
   kleur@3.0.3: {}
 
-  langchain@0.1.37(axios@1.13.3)(handlebars@4.7.8)(ignore@5.3.2)(lodash@4.17.23)(mongodb@6.21.0)(openai@4.104.0(ws@8.18.3)(zod@3.25.76))(redis@4.7.1)(ws@8.18.3):
+  langchain@0.1.37(axios@1.13.3)(handlebars@4.7.8)(ignore@5.3.2)(lodash@4.17.23)(mongodb@6.21.0)(openai@4.104.0(ws@8.18.3)(zod@3.25.76))(playwright@1.58.1)(redis@4.7.1)(ws@8.18.3):
     dependencies:
       '@anthropic-ai/sdk': 0.9.1
       '@langchain/community': 0.0.57(lodash@4.17.23)(mongodb@6.21.0)(openai@4.104.0(ws@8.18.3)(zod@3.25.76))(redis@4.7.1)(ws@8.18.3)
@@ -9956,6 +9986,7 @@ snapshots:
       handlebars: 4.7.8
       ignore: 5.3.2
       mongodb: 6.21.0
+      playwright: 1.58.1
       redis: 4.7.1
       ws: 8.18.3
     transitivePeerDependencies:
@@ -10569,6 +10600,14 @@ snapshots:
   pkg-dir@4.2.0:
     dependencies:
       find-up: 4.1.0
+
+  playwright-core@1.58.1: {}
+
+  playwright@1.58.1:
+    dependencies:
+      playwright-core: 1.58.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   pngjs@5.0.0: {}
 

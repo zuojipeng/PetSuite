@@ -160,7 +160,11 @@ export class ProductRecommendationAgent extends BaseAgent {
     mustNotHave: string[];
     preferred: string[];
   } {
-    const constraints = {
+    const constraints: {
+      mustHave: string[];
+      mustNotHave: string[];
+      preferred: string[];
+    } = {
       mustHave: [petProfile.species],
       mustNotHave: [...(petProfile.allergies || [])],
       preferred: [],
@@ -168,14 +172,14 @@ export class ProductRecommendationAgent extends BaseAgent {
 
     // Add age-specific constraints
     if (petProfile.age < 1) {
-      constraints.mustHave.push('puppy', 'kitten', 'young');
+      constraints.preferred.push('young');
     } else if (petProfile.age > 7) {
-      constraints.mustHave.push('senior');
+      constraints.preferred.push('senior-friendly');
     }
 
     // Add health-specific constraints
     if (petProfile.healthScore < 70) {
-      constraints.preferred.push('gentle', 'low-impact', 'easy-digest');
+      constraints.preferred.push('health-support');
     }
 
     return constraints;

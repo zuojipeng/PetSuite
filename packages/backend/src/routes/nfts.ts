@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { ethers } from 'ethers';
 import { collections } from '../database/mongodb';
 
-const router = Router();
+const router: Router = Router();
 
 // POST /api/nfts/mint - Mint pet NFT
 router.post('/mint', async (req: Request, res: Response) => {

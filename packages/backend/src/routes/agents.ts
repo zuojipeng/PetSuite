@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { AgentOrchestrator } from '../agents/orchestrator/AgentOrchestrator';
 import { collections } from '../database/mongodb';
 
-const router = Router();
+const router: Router = Router();
 
 // Initialize orchestrator
 let orchestrator: AgentOrchestrator;
