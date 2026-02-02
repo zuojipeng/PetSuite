@@ -50,3 +50,11 @@ data/
 
 # Documentation (local only)
 docs/
+
+# Playwright test artifacts
+playwright-report/
+test-results/
+e2e-screenshots/
+*/playwright-report/
+*/test-results/
+*/e2e-screenshots/
