@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './database/mongodb';
 import { initializeModels } from './models';
+import userRoutes from './routes/users';
 import agentRoutes, { initializeOrchestrator } from './routes/agents';
 import nftRoutes from './routes/nfts';
 import petRoutes from './routes/pets';
@@ -38,6 +39,7 @@ app.get('/health', (req: Request, res: Response) => {
 });
 
 // Routes
+app.use('/api/users', userRoutes);
 app.use('/api/agents', agentRoutes);
 app.use('/api/nfts', nftRoutes);
 app.use('/api/pets', petRoutes);

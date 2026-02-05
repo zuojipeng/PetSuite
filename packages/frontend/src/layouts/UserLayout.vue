@@ -73,7 +73,7 @@
                   {{ t('nav.myNFTs') }}
                 </router-link>
 
-                <div v-if="connected && hasRole('merchant')" class="border-t border-gray-100 my-2"></div>
+                <div v-if="connected" class="border-t border-gray-100 my-2"></div>
                 <router-link
                   v-if="connected && hasRole('merchant')"
                   to="/merchant/dashboard"
@@ -81,6 +81,14 @@
                   class="block px-4 py-2 text-sm text-purple-600 hover:bg-purple-50 font-medium"
                 >
                   {{ t('nav.merchantCenter') }} →
+                </router-link>
+                <router-link
+                  v-if="connected && !hasRole('merchant')"
+                  to="/become-merchant"
+                  @click="showProfileDropdown = false"
+                  class="block px-4 py-2 text-sm text-orange-600 hover:bg-orange-50 font-medium"
+                >
+                  🏪 成为商家
                 </router-link>
               </div>
             </div>

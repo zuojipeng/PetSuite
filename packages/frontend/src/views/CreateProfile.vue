@@ -245,11 +245,13 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useAPI } from '../composables/useAPI'
 import { useAppStore } from '../store'
+import { useWeb3 } from '../composables/useWeb3'
 
 const { t } = useI18n()
 const router = useRouter()
 const api = useAPI()
 const store = useAppStore()
+const { address } = useWeb3()
 
 const steps = computed(() => [
   t('createProfile.steps.basic'),
@@ -311,6 +313,13 @@ const handleSubmit = async () => {
   loading.value = true
   error.value = ''
 
+  // 检查是否连接钱包
+  if (!address.value) {
+    error.value = t('createProfile.error.walletNotConnected') || 'Please connect your wallet first'
+    loading.value = false
+    return
+  }
+
   try {
     const description = [
       `${t('createProfile.summary.name')}: ${form.value.name}`,
@@ -324,10 +333,16 @@ const handleSubmit = async () => {
     ].join('\n')
 
     const response = await api.createProfile({
+      owner: address.value.toLowerCase(), // 添加 owner 字段
       name: form.value.name,
       species: form.value.species,
       age: form.value.age ?? 1,
+      breed: form.value.breed || '',
       description,
+      healthDescription: form.value.healthDescription,
+      dietPreferences: form.value.dietPreferences,
+      personality: form.value.personality,
+      habits: form.value.habits,
     })
 
     if (response.success) {

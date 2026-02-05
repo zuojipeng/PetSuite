@@ -1,6 +1,10 @@
 import { ref } from 'vue'
 import { ethers } from 'ethers'
 import { useAppStore } from '../store'
+import { useAuthStore } from '../store/auth'
+import axios from 'axios'
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
 declare global {
   interface Window {
@@ -14,6 +18,7 @@ const connected = ref(false)
 
 export function useWeb3() {
   const store = useAppStore()
+  const authStore = useAuthStore()
 
   async function connect() {
     if (!window.ethereum) {
@@ -38,9 +43,52 @@ export function useWeb3() {
         alert('已连接钱包，但切换网络失败，请手动切换到 Monad 测试网')
       }
 
+      // 注册或获取用户信息
+      try {
+        await registerOrGetUser(address.value)
+      } catch (error) {
+        console.error('Failed to register/get user:', error)
+        // 不阻塞连接流程，只是记录错误
+      }
+
       console.log('Connected to wallet:', address.value)
     } catch (error: any) {
       console.error('Failed to connect wallet:', error)
+      throw error
+    }
+  }
+
+  async function registerOrGetUser(walletAddress: string) {
+    try {
+      // 调用后端注册或获取用户
+      const response = await axios.post(`${API_URL}/api/users/register`, {
+        walletAddress: walletAddress.toLowerCase(),
+      })
+
+      if (response.data.success) {
+        const userData = response.data.data
+
+        // 更新 auth store
+        authStore.setWalletAddress(userData.walletAddress)
+        authStore.setUserProfile({
+          walletAddress: userData.walletAddress,
+          displayName: userData.displayName,
+          email: userData.email,
+          roles: userData.roles,
+        })
+
+        // 如果是商家，设置商家信息
+        if (userData.merchantProfile && userData.roles.includes('merchant')) {
+          authStore.setMerchantProfile(userData.merchantProfile)
+        }
+
+        // 保存到 localStorage
+        authStore.saveToStorage()
+
+        console.log('✅ User registered/retrieved:', userData)
+      }
+    } catch (error: any) {
+      console.error('❌ Failed to register/get user:', error)
       throw error
     }
   }

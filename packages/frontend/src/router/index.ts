@@ -78,6 +78,11 @@ const routes: RouteRecordRaw[] = [
         name: 'MyOrders',
         component: () => import('../views/MyOrders.vue'),
       },
+      {
+        path: 'become-merchant',
+        name: 'BecomeAMerchant',
+        component: () => import('../views/BecomeAMerchant.vue'),
+      },
     ],
   },
 
@@ -193,10 +198,9 @@ router.beforeEach((to, from, next) => {
     }
 
     if (!authStore.isMerchant) {
-      // 没有商家权限，重定向到首页
-      // TODO: 后续可以引导用户注册成为商家
-      alert('您还不是商家，请先注册商家账户')
-      return next('/')
+      // 没有商家权限，引导用户申请成为商家
+      alert('您还不是商家，请先申请商家账户')
+      return next('/become-merchant')
     }
   }
 

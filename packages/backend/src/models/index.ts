@@ -1,3 +1,4 @@
+export * from './User';
 export * from './Pet';
 export * from './Product';
 export * from './Order';

@@ -26,8 +26,12 @@ export function getDB(): Db {
 }
 
 export const collections = {
+  users: () => getDB().collection('users'),
   pets: () => getDB().collection('pets'),
   recommendations: () => getDB().collection('recommendations'),
   products: () => getDB().collection('products'),
-  users: () => getDB().collection('users'),
+  orders: () => getDB().collection('orders'),
+  merchants: () => getDB().collection('merchants'),
+  nftAssets: () => getDB().collection('nftAssets'),
+  aiAnalysis: () => getDB().collection('aiAnalysis'),
 };
