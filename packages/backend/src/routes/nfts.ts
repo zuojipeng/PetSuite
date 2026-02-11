@@ -135,6 +135,33 @@ router.get('/user/:address', async (req: Request, res: Response) => {
   try {
     const { address } = req.params;
 
+    // Mock mode for hackathon demo - no real blockchain needed
+    if (process.env.MOCK_MODE === 'true') {
+      return res.json({
+        success: true,
+        nfts: [
+          {
+            tokenId: 1,
+            petName: '金毛豆豆',
+            species: 'dog',
+            breed: 'Golden Retriever',
+            healthScore: 85,
+            discount: 15,
+          },
+          {
+            tokenId: 2,
+            petName: '咪咪',
+            species: 'cat',
+            breed: 'British Shorthair',
+            healthScore: 92,
+            discount: 20,
+          }
+        ],
+        total: 2,
+        mock: true,
+      });
+    }
+
     const nfts = await collections.pets()
       .find({ owner: address })
       .toArray();

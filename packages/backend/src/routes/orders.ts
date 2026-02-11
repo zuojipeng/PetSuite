@@ -13,9 +13,11 @@ router.post('/', async (req: Request, res: Response) => {
     const productModel = new ProductModel();
     const nftAssetModel = new NFTAssetModel();
 
-    const { buyerAddress, productId, quantity, nftTokenId } = req.body;
+    const { buyerAddress, productId, quantity, nftTokenId, items } = req.body;
+    const normalizedProductId = productId || (Array.isArray(items) ? items[0]?.productId : undefined);
+    const normalizedQuantity = quantity || (Array.isArray(items) ? items[0]?.quantity : undefined);
 
-    if (!buyerAddress || !productId || !quantity) {
+    if (!buyerAddress || !normalizedProductId || !normalizedQuantity) {
       return res.status(400).json({
         success: false,
         error: 'Missing required fields: buyerAddress, productId, quantity',
@@ -23,7 +25,7 @@ router.post('/', async (req: Request, res: Response) => {
     }
 
     // 获取产品信息
-    const product = await productModel.findById(productId);
+    const product = await productModel.findById(normalizedProductId);
     if (!product) {
       return res.status(404).json({
         success: false,
@@ -32,7 +34,7 @@ router.post('/', async (req: Request, res: Response) => {
     }
 
     // 检查库存
-    if (product.inventory < quantity) {
+    if (product.inventory < normalizedQuantity) {
       return res.status(400).json({
         success: false,
         error: 'Insufficient inventory',
@@ -42,7 +44,7 @@ router.post('/', async (req: Request, res: Response) => {
 
     // 计算价格
     const unitPrice = parseFloat(product.price);
-    let originalAmount = unitPrice * quantity;
+    let originalAmount = unitPrice * normalizedQuantity;
     let discountPercent = 0;
     let appliedNFT = false;
 
@@ -69,14 +71,14 @@ router.post('/', async (req: Request, res: Response) => {
       orderNumber,
       buyerAddress,
       merchantAddress: product.merchantAddress,
-      productId: productId,
+      productId: normalizedProductId,
       productSnapshot: {
         name: product.name,
         price: product.price,
         image: product.images[0] || '',
         category: product.category,
       },
-      quantity,
+      quantity: normalizedQuantity,
       totalAmount: totalAmount.toFixed(6),
       originalAmount: originalAmount.toFixed(6),
       discount: {

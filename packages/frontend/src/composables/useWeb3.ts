@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, shallowRef, markRaw } from 'vue'
 import { ethers } from 'ethers'
 import { useAppStore } from '../store'
 import { useAuthStore } from '../store/auth'
@@ -12,7 +12,7 @@ declare global {
   }
 }
 
-const provider = ref<ethers.BrowserProvider | null>(null)
+const provider = shallowRef<ethers.BrowserProvider | null>(null)
 const address = ref('')
 const connected = ref(false)
 
@@ -27,7 +27,7 @@ export function useWeb3() {
     }
 
     try {
-      provider.value = new ethers.BrowserProvider(window.ethereum)
+      provider.value = markRaw(new ethers.BrowserProvider(window.ethereum))
       await provider.value.send('eth_requestAccounts', [])
 
       const signer = await provider.value.getSigner()
@@ -35,6 +35,17 @@ export function useWeb3() {
       connected.value = true
 
       store.setWallet(address.value)
+      authStore.setWalletAddress(address.value)
+      if (!authStore.userProfile) {
+        authStore.setUserProfile({
+          walletAddress: address.value.toLowerCase(),
+          displayName: `User ${address.value.slice(0, 6)}`,
+          roles: ['user'],
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
+      }
+      authStore.saveToStorage()
 
       try {
         await switchToMonad()

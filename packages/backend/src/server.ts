@@ -32,6 +32,7 @@ app.use((req: Request, res: Response, next) => {
 // Health check
 app.get('/health', (req: Request, res: Response) => {
   res.json({
+    success: true,
     status: 'healthy',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),

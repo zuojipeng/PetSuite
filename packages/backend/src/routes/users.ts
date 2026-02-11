@@ -193,16 +193,18 @@ router.post('/:walletAddress/apply-merchant', async (req: Request, res: Response
 
     // 检查是否已经是商家或已有申请
     if (user.roles.includes('merchant')) {
-      return res.status(400).json({
-        success: false,
-        error: 'Already a merchant',
+      return res.json({
+        success: true,
+        data: user,
+        message: 'Already a merchant',
       });
     }
 
     if (user.merchantProfile?.applicationStatus === 'pending') {
-      return res.status(400).json({
-        success: false,
-        error: 'Merchant application already pending',
+      return res.json({
+        success: true,
+        data: user,
+        message: 'Merchant application already pending',
       });
     }
 
@@ -262,6 +264,13 @@ router.post('/:walletAddress/approve-merchant', async (req: Request, res: Respon
     }
 
     if (!user.merchantProfile || user.merchantProfile.applicationStatus !== 'pending') {
+      if (user.roles.includes('merchant')) {
+        return res.json({
+          success: true,
+          data: user,
+          message: 'Merchant already approved',
+        });
+      }
       return res.status(400).json({
         success: false,
         error: 'No pending merchant application',
@@ -269,21 +278,23 @@ router.post('/:walletAddress/approve-merchant', async (req: Request, res: Respon
     }
 
     // 更新申请状态
-    const updateData: any = {
+    const updateFields: any = {
       'merchantProfile.applicationStatus': approved ? 'approved' : 'rejected',
       'merchantProfile.approvalDate': new Date(),
       updatedAt: new Date(),
     };
 
+    const updateDoc: any = { $set: updateFields };
+
     // 如果批准，添加 merchant 角色
     if (approved) {
-      updateData.$addToSet = { roles: 'merchant' };
-      updateData['merchantProfile.verified'] = true;
+      updateFields['merchantProfile.verified'] = true;
+      updateDoc.$addToSet = { roles: 'merchant' };
     }
 
     const result = await usersCollection.findOneAndUpdate(
       { walletAddress: walletAddress.toLowerCase() },
-      { $set: updateData },
+      updateDoc,
       { returnDocument: 'after' }
     );
 
